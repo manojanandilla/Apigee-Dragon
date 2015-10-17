@@ -43,6 +43,7 @@ public class MACDetailsService {
     	macDetails.setTiming_Offset(listOfDetails[6]);
     	macDetails.setNum_CPE(listOfDetails[7]);
     	macDetails.setDIP(listOfDetails[8]);
+    	System.out.println(macDetails.toString());
         return macDetails;
     }
 

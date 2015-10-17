@@ -11,7 +11,7 @@ import org.springframework.context.annotation.ComponentScan;
 import com.mangofactory.swagger.plugin.EnableSwagger;
 
 @EnableAutoConfiguration  // Sprint Boot Auto Configuration
-@ComponentScan(basePackages = "com.trigital.cm,be.g00glen00b")
+@ComponentScan(basePackages = "com.trigital.cm")
 @EnableSwagger // auto generation of API docs
 public class TrigitalApiApplication extends SpringBootServletInitializer {
 	

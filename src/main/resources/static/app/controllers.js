@@ -1,17 +1,36 @@
-
-
-
-
-myApp.controller('MacDetailController',function($scope, $location, MacDetailService){
-	alert('i am here ');
-	$scope.macDetail = new MacDetailService();
-	
-	$scope.getMacDetails = function(){
+(function(angular) {
+  var AppController = function($scope, Item) {
+    Item.get(function(response) {
+      $scope.items = response ? response : [];
+    });
     
-      $scope.macDetail.$save()
-        .then(function(macDetails){
-          alert(macDetails);
-        });
+    $scope.addItem = function(description) {
+      new Item({
+        description: description,
+        checked: false
+      }).$save(function(item) {
+        $scope.items.push(item);
+      });
+      $scope.newItem = "";
+    };
     
-  }
-});
+    $scope.updateItem = function(item) {
+      item.$update();
+    };
+    
+    $scope.deleteItem = function(item) {
+      item.$remove(function() {
+        $scope.items.splice($scope.items.indexOf(item), 1);
+      });
+    };
+      
+    $scope.getMacDetails = function(){
+        new Item().$save(function(macDetail){
+            //$scope.items.push(macDetail);
+        })
+    };
+  };
+  
+  AppController.$inject = ['$scope', 'Item'];
+  angular.module("myApp.controllers").controller("AppController", AppController);
+}(angular));
