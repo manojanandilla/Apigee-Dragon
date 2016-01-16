@@ -1,36 +1,21 @@
 (function(angular) {
-  var AppController = function($scope, Item) {
-    Item.get(function(response) {
-      $scope.items = response ? response : [];
-    });
-    
-    $scope.addItem = function(description) {
-      new Item({
-        description: description,
-        checked: false
-      }).$save(function(item) {
-        $scope.items.push(item);
-      });
-      $scope.newItem = "";
-    };
-    
-    $scope.updateItem = function(item) {
-      item.$update();
-    };
-    
-    $scope.deleteItem = function(item) {
-      item.$remove(function() {
-        $scope.items.splice($scope.items.indexOf(item), 1);
-      });
-    };
-      
-    $scope.getMacDetails = function(){
-        new Item().$save(function(macDetail){
-            //$scope.items.push(macDetail);
-        })
-    };
+  var AppController = function($scope,WSDL) {
+	  
+	  $scope.hideSelect = false;
+	  
+	  WSDL.getWSDL().query().$promise.then(function(result){
+		  $scope.wsdls = result;
+	  });
+	  
+	  
+	  $scope.getOperations = function(name){
+		  $scope.operations = WSDL.getOperations(name).query();
+		  $scope.hideSelect = true;
+		  $scope.types = ['Request','Response'];
+	  }
+	  
   };
   
-  AppController.$inject = ['$scope', 'Item'];
+  AppController.$inject = ['$scope','WSDL'];
   angular.module("myApp.controllers").controller("AppController", AppController);
 }(angular));

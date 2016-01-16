@@ -7,51 +7,87 @@
 <body ng-app="myApp">
 	<div class="container" ng-controller="AppController">
 		<div class="page-header">
-			<h1>Trigital Api</h1>
+			<h1>Apigee Snap Dragon</h1>
 		</div>
-		<div class="alert alert-info" role="alert"
-			ng-hide="items &amp;&amp; items.length > 0">There are no items
-			yet.</div>
 
-		<div>
 
-			<div class="page-header">
-				<h3>Mac Details</h3>
-			</div>
+		<div class="page-header">
+			<h3>Data Mapping Validator</h3>
+		</div>
 
-			<form class="form-horizontal">
-				<div class="form-group">
-					<label class="control-label col-sm-2" for="content">Mac
-						Address :</label>
-					<div class="col-sm-10">
-						<input ng-model="macDetail.macAddress" id="macAddress"
-							class="form-control" />
+		<form>
+			<div class="row">
+
+				<div class="col-md-6">
+				
+					<div class="form-group">
+						<textarea rows="10" cols="50"></textarea>
 					</div>
-				</div>
-				<div class="form-group">
-					<label class="control-label col-sm-2" for="content">Ip
-						Address :</label>
-					<div class="col-sm-10">
-						<input ng-model="macDetail.ipAddress" id="ipAddress"
-							class="form-control" />
-					</div>
-				</div>
-				<div class="form-group">
-					<div class="col-sm-10 col-sm-offset-2">
+
+					<div class="form-group">
 						<button type="submit" class="btn btn-primary"
 							ng-click="getMacDetails()">
-							<span class="glyphicon glyphicon-ok"></span> Get MacDetails
+							<span class="glyphicon glyphicon-ok"></span>Submit
 						</button>
 					</div>
 				</div>
-			</form>
-		</div>
+
+				<div class="col-md-6">
+
+					<div class="form-group">
+
+						<div class="form-group">
+							<label class="control-label col-sm-2" for="content">WSDL</label>
+
+							<div class="col-sm-4">
+								<select ng-model="wsdl"
+									ng-options="wsdlObj.wsdlName for wsdlObj in wsdls"
+									class="form-control" ng-change="getOperations(wsdl.wsdlName)">
+									<option value="">Select WSDL</option>
+								</select>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<div class="col-sm-4" ng-show="hideSelect">
+								<select ng-model="operation"
+									ng-options="operation for operation in operations"
+									class="form-control">
+									<option value="">Select Operations</option>
+								</select>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<div class="col-sm-4" ng-show="hideSelect">
+								<select ng-model="type" ng-options="type for type in types"
+									class="form-control">
+									<option value="">Select Type</option>
+								</select>
+							</div>
+						</div>
+
+					</div>
+
+
+				</div>
+
+			</div>
+
+
+
+
+		</form>
 	</div>
-    <script src="./bower_components/angular/angular.js" type="text/javascript"></script>
-    <script src="./bower_components/angular-resource/angular-resource.js" type="text/javascript"></script>
-    <script src="./bower_components/angular-route/angular-route.js" type="text/javascript"></script>
-    <script type="text/javascript" src="./app/app.js"></script>
-    <script type="text/javascript" src="./app/controllers.js"></script>
-    <script type="text/javascript" src="./app/services.js"></script>
+	</div>
+	<script src="./bower_components/angular/angular.js"
+		type="text/javascript"></script>
+	<script src="./bower_components/angular-resource/angular-resource.js"
+		type="text/javascript"></script>
+	<script src="./bower_components/angular-route/angular-route.js"
+		type="text/javascript"></script>
+	<script type="text/javascript" src="./app/app.js"></script>
+	<script type="text/javascript" src="./app/controllers.js"></script>
+	<script type="text/javascript" src="./app/services.js"></script>
 </body>
 </html>
