@@ -2,14 +2,11 @@ package com.tmobile.apigee.api.rest;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.ws.rs.Path;
 
-import org.junit.runners.Parameterized.Parameters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,15 +15,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import scala.collection.immutable.Page;
-
-import com.tmobile.apigee.domain.MACDetails;
-import com.tmobile.apigee.exception.DataFormatException;
+import com.tmobile.apigee.domain.WSDL;
 import com.tmobile.apigee.service.DMValidatorService;
-import com.tmobile.apigee.service.MACDetailsService;
 import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
-import com.wordnik.swagger.annotations.ApiParam;
 
 /*
  * Demonstrates how to set up RESTful API endpoints using Spring MVC
@@ -36,9 +28,6 @@ import com.wordnik.swagger.annotations.ApiParam;
 @RequestMapping(value = "/dmvalidator")
 @Api(value = "datamapping", description = "Data Mapping Validator API")
 public class DataMappingValidatorController extends AbstractRestHandler {
-
-    @Autowired
-    private MACDetailsService macDetailsService;
     
     @Autowired
     private DMValidatorService dmValidatorService;
@@ -51,9 +40,9 @@ public class DataMappingValidatorController extends AbstractRestHandler {
     @ApiOperation(value = "Create a hotel resource.", notes = "Returns the URL of the new resource in the Location header.")
     public
     @ResponseBody
-    ResponseEntity createHotel(@RequestBody MACDetails macDetails,
+    ResponseEntity createHotel(@RequestBody WSDL wsdl,
                                  HttpServletRequest request, HttpServletResponse response) {
-    	return this.success(this.macDetailsService.getMACDetails(macDetails.getIp_Address(), macDetails.getMac_Address()));
+    	return this.success(this.dmValidatorService.validateDM(wsdl));
     }
 
     
@@ -84,6 +73,8 @@ public class DataMappingValidatorController extends AbstractRestHandler {
 		
         return this.success(dmValidatorService.getOperations(wsdlName));
     }
+    
+    
     
     
     

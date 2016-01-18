@@ -8,13 +8,19 @@ public class WSDL {
 	private String wsdlVersion;
 	private String operation;
 	private String type;
+	private String xPath;
+	 
+	public WSDL() {
+		// TODO Auto-generated constructor stub
+	}
 	
-	public WSDL(String wsdlName, String wsdlVersion, String operation,String type) {
+	public WSDL(String wsdlName, String wsdlVersion, String operation,String type,String xPath) {
 		
 		this.wsdlName = wsdlName;
 		this.wsdlVersion = wsdlVersion;
 		this.operation = operation;
 		this.type = type;
+		this.xPath = xPath;
 	}
 
 	public String getWsdlName() {
@@ -48,5 +54,15 @@ public class WSDL {
 	public void setType(String type) {
 		this.type = type;
 	}
+
+	public String getxPath() {
+		return xPath;
+	}
+
+	public void setxPath(String xPath) {
+		this.xPath = xPath;
+	}
+	
+	
 
 }

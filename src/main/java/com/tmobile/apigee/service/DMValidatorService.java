@@ -5,11 +5,8 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.tmobile.apigee.domain.MACDetails;
-import com.tmobile.apigee.domain.Operations;
 import com.tmobile.apigee.domain.WSDL;
 
 @Service
@@ -21,14 +18,14 @@ public class DMValidatorService {
     	
     }
     
-    public List<WSDL> getWSDLs(){
+    public List<String> getWSDLs(){
     	
-    	List<WSDL> listOfWSDLs = new ArrayList<WSDL>();
+    	List<String> listOfWSDLs = new ArrayList<String>();
     	
-    	listOfWSDLs.add(new WSDL("CartWSIL", "9.7", null, null));
-    	listOfWSDLs.add(new WSDL("PaymentWSIL", "9.7", null, null));
-    	listOfWSDLs.add(new WSDL("PortWSIL", "9.7", null, null));
-    	listOfWSDLs.add(new WSDL("OrderWSIL", "9.7", null, null));
+    	listOfWSDLs.add("CartWSIL");
+    	listOfWSDLs.add("PaymentWSIL");
+    	listOfWSDLs.add("PortWSIL");
+    	listOfWSDLs.add("OrderWSIL");
     	
     	return listOfWSDLs;
     }
@@ -45,6 +42,11 @@ public class DMValidatorService {
     	
     	return listOfOperations;
     }
+
+	public String validateDM(WSDL wsdl) {
+		
+		return "abcdef asdfa asdfas asdfasdf ";
+	}
     
 
 

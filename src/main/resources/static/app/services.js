@@ -7,7 +7,7 @@
 	this.getWSDL = function () {
         return $resource(urlBase);
     };
-
+    
     this.getOperations = function (name) {
         return $resource(urlBase + '/operations?name='+name);
     };

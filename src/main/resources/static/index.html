@@ -3,6 +3,7 @@
 <head>
 <link rel="stylesheet"
 	href="./bower_components/bootstrap-css-only/css/bootstrap.min.css" />
+<link rel="stylesheet" href="./css/layout.css" />
 </head>
 <body ng-app="myApp">
 	<div class="container" ng-controller="AppController">
@@ -18,56 +19,52 @@
 		<form>
 			<div class="row">
 
-				<div class="col-md-6">
-				
+				<div class="col-md-4">
 					<div class="form-group">
-						<textarea rows="10" cols="50"></textarea>
+						<textarea ng-model="wsdl.xPath" rows="10" cols="50"></textarea>
 					</div>
-
+				</div>
+				<div class="col-md-1">
 					<div class="form-group">
 						<button type="submit" class="btn btn-primary"
-							ng-click="getMacDetails()">
+							ng-click="validate()">
 							<span class="glyphicon glyphicon-ok"></span>Submit
 						</button>
 					</div>
 				</div>
-
 				<div class="col-md-6">
 
-					<div class="form-group">
 
-						<div class="form-group">
-							<label class="control-label col-sm-2" for="content">WSDL</label>
 
-							<div class="col-sm-4">
-								<select ng-model="wsdl"
-									ng-options="wsdlObj.wsdlName for wsdlObj in wsdls"
-									class="form-control" ng-change="getOperations(wsdl.wsdlName)">
-									<option value="">Select WSDL</option>
-								</select>
-							</div>
+					<div class="row">
+
+						<div class="dropdown">
+							<select ng-model="wsdl.wsdlName"
+								ng-options="wsdlName for wsdlName in wsdls"
+								class="form-control" ng-change="getOperations(wsdl.wsdlName)">
+								<option value="">Select WSDL</option>
+							</select>
 						</div>
 
-						<div class="form-group">
-							<div class="col-sm-4" ng-show="hideSelect">
-								<select ng-model="operation"
-									ng-options="operation for operation in operations"
-									class="form-control">
-									<option value="">Select Operations</option>
-								</select>
-							</div>
+
+						<div class="dropdown" ng-show="hideSelect">
+							<select ng-model="wsdl.operation"
+								ng-options="operation for operation in operations"
+								class="form-control">
+								<option value="">Select Operations</option>
+							</select>
 						</div>
 
-						<div class="form-group">
-							<div class="col-sm-4" ng-show="hideSelect">
-								<select ng-model="type" ng-options="type for type in types"
-									class="form-control">
-									<option value="">Select Type</option>
-								</select>
-							</div>
-						</div>
 
+						<div class="dropdown" ng-show="hideSelect">
+							<select ng-model="wsdl.type" ng-options="type for type in types"
+								class="form-control">
+								<option value="">Select Type</option>
+							</select>
+						</div>
 					</div>
+
+
 
 
 				</div>
