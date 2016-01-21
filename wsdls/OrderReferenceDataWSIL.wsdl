@@ -1,0 +1,1428 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<wsdl11:definitions xmlns:wsdl11="http://schemas.xmlsoap.org/wsdl/" xmlns:soap11="http://schemas.xmlsoap.org/wsdl/soap/"
+   xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+   xmlns:whttp="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http:/schemas.xmlsoap.org/wsdl/mime/"
+   xmlns:csom="http://services.tmobile.com/ReferenceData/OrderReferenceDataWSIL/V1"
+   xmlns:wsp="http://www.w3.org/ns/ws-policy" targetNamespace="http://services.tmobile.com/ReferenceData/OrderReferenceDataWSIL/V1"
+   xmlns:base="http://services.tmobile.com/base">
+  <wsdl11:documentation>Name: OrderReferenceDataWSIL
+Version: 1.17182710
+CSOM 9.17.1
+TransactionObjects 1.9.1
+R2CD4</wsdl11:documentation>
+  <!--BEGIN ABSTRACT DESCRIPTION-->
+  <wsdl11:types>
+    <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xml="http://www.w3.org/XML/1998/namespace"
+       elementFormDefault="qualified" attributeFormDefault="unqualified" targetNamespace="http://services.tmobile.com/ReferenceData/OrderReferenceDataWSIL/V1"
+       xmlns:csom="http://services.tmobile.com/ReferenceData/OrderReferenceDataWSIL/V1"
+       version="1" xmlns:base="http://services.tmobile.com/base">  <!--Schema import TransactionObjects is actually inlined into the service definiton. Changing to namespace import.-->
+      <xsd:import namespace="http://services.tmobile.com/base"/>
+      <xsd:complexType name="NamedText">
+        <xsd:sequence minOccurs="0">
+          <xsd:element name="name" type="csom:Name" minOccurs="0" maxOccurs="unbounded"/>
+          <xsd:element name="text" type="csom:Text" minOccurs="0" maxOccurs="unbounded"/>
+          <xsd:element name="helpText" type="csom:Text" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+        <xsd:attribute name="id" type="xsd:token"/>
+      </xsd:complexType>
+      <xsd:complexType name="Text">
+        <xsd:annotation>
+          <xsd:documentation>A character string.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleContent>
+          <xsd:extension base="xsd:normalizedString">
+            <xsd:attribute name="languageCode" type="csom:LanguageCode">
+              <xsd:annotation/>
+            </xsd:attribute>
+          </xsd:extension>
+        </xsd:simpleContent>
+      </xsd:complexType>
+      <xsd:complexType name="Address">
+        <xsd:annotation>
+          <xsd:documentation>A place where a person or organization may be communicated with.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence minOccurs="0">
+          <xsd:element ref="csom:postalCode" minOccurs="0"/>
+          <xsd:element name="key" type="csom:DomainKey" minOccurs="0" maxOccurs="unbounded"/>
+          <xsd:element name="residentialIndicator" type="csom:Indicator" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>To indicate if the address is for residential or business</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="Market">
+        <xsd:annotation>
+          <xsd:documentation>A market is a geographic area which is managed as a business unit, and within which the product offerings of a company are uniform and consistent. 
+    Other markets may offer different products, or the same products at different prices or different times, or through different promotions.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence minOccurs="0">
+          <xsd:element name="marketName" type="xsd:normalizedString" minOccurs="0"/>
+          <xsd:element name="marketCode" type="csom:MarketCode" minOccurs="0"/>
+        </xsd:sequence>
+        <xsd:attribute name="referenceURI" type="csom:ReferenceURI"/>
+      </xsd:complexType>
+      <xsd:complexType name="SalesChannelReference">
+        <xsd:annotation>
+          <xsd:documentation>Describes the manner in which contact is made between T-Mobile and the customer.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence minOccurs="0">
+          <xsd:element name="salesChannelCode" type="csom:SalesChannelCode"
+             minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>A short-hand unique identifier of the channel, for a specific usage.  For example codeKey="CDC" usageContext = "WEBCATALOG"</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="name" type="xsd:normalizedString" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>The label by which the channel is known. This is a user-friendly name, appropriate for display. This should always be populated if possible, as this is the place  	applications will look for a name to display to users.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="description" type="csom:Description" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>The primary description of the channel.  Note: only english description is needed here.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="salesSubChannelCode" type="csom:SalesSubChannelCode"
+             minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>Sales Sub-Channel Code</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="subChannelCategory" type="xsd:token" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>Sub-Channel category, such as Frontline Support Teams, Business TeleSales, Small Business TeleSales, Web TeleSales Inside Sales, Small Business Mid-Market, Major Accounts</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="inventoryChannelCode" type="csom:InventoryChannelCode"
+             minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>Sales channel code from SAP</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+        <xsd:attribute name="referenceURI" type="csom:ReferenceURI">
+          <xsd:annotation>
+            <xsd:documentation>A URI that can be used to retrieve information about the Sales Channel.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="salesChannelId" type="xsd:token">
+          <xsd:annotation>
+            <xsd:documentation>Uniquely identifies the Sales Channel.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+      </xsd:complexType>
+      <xsd:element name="getFulfillmentMethodsResponse">
+        <xsd:complexType>
+          <xsd:complexContent>
+            <xsd:extension base="base:BaseResponse">
+              <xsd:sequence>
+                <xsd:element name="fulfillmentMethods" type="csom:NamedText"
+                   minOccurs="0" maxOccurs="unbounded"/>
+              </xsd:sequence>
+            </xsd:extension>
+          </xsd:complexContent>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getFulfillmentMethodsRequest">
+        <xsd:complexType>
+          <xsd:complexContent>
+            <xsd:extension base="base:BaseRequest">
+              <xsd:sequence>
+                <xsd:element name="salesChannel" type="csom:SalesChannelReference"
+                   minOccurs="0"/>
+              </xsd:sequence>
+            </xsd:extension>
+          </xsd:complexContent>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getCustomerRoleTypesResponse">
+        <xsd:complexType>
+          <xsd:complexContent>
+            <xsd:extension base="base:BaseResponse">
+              <xsd:sequence>
+                <xsd:element name="roleTypesList" minOccurs="0">
+                  <xsd:complexType>
+                    <xsd:sequence>
+                      <xsd:element name="roleType" minOccurs="0" maxOccurs="unbounded">
+                        <xsd:complexType>
+                          <xsd:sequence>
+                            <xsd:element name="roleName" type="csom:CustomerRoleType"
+                               minOccurs="0"/>
+                            <xsd:element name="roleDescription" type="xsd:normalizedString"
+                               minOccurs="0" maxOccurs="unbounded"/>
+                          </xsd:sequence>
+                        </xsd:complexType>
+                      </xsd:element>
+                    </xsd:sequence>
+                  </xsd:complexType>
+                </xsd:element>
+              </xsd:sequence>
+            </xsd:extension>
+          </xsd:complexContent>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getModeOfExchangeResponse">
+        <xsd:complexType>
+          <xsd:complexContent>
+            <xsd:extension base="base:BaseResponse">
+              <xsd:sequence>
+                <xsd:element name="modeOfExchange" type="csom:NamedText" minOccurs="0"
+                   maxOccurs="unbounded"/>
+              </xsd:sequence>
+            </xsd:extension>
+          </xsd:complexContent>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getDomainReferenceDataRequest">
+        <xsd:complexType>
+          <xsd:complexContent>
+            <xsd:extension base="base:BaseRequest">
+              <xsd:sequence>
+                <xsd:element name="domainName" type="csom:NamedText" minOccurs="0"/>
+              </xsd:sequence>
+            </xsd:extension>
+          </xsd:complexContent>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getModeOfExchangeRequest">
+        <xsd:complexType>
+          <xsd:complexContent>
+            <xsd:extension base="base:BaseRequest">
+              <xsd:sequence/>
+            </xsd:extension>
+          </xsd:complexContent>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="postalCode" type="csom:PostalCode">
+        <xsd:annotation>
+          <xsd:documentation>A code specifying the postal code of the address</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="getDeviceAssessmentQuestionsRequest">
+        <xsd:complexType>
+          <xsd:complexContent>
+            <xsd:extension base="base:BaseRequest">
+              <xsd:sequence>
+                <xsd:element name="assementQuestionsContext" type="csom:Text"
+                   minOccurs="0"/>
+              </xsd:sequence>
+            </xsd:extension>
+          </xsd:complexContent>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getCustomerRoleTypesRequest">
+        <xsd:complexType>
+          <xsd:complexContent>
+            <xsd:extension base="base:BaseRequest">
+              <xsd:sequence/>
+            </xsd:extension>
+          </xsd:complexContent>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getMarketAddressMappingResponse">
+        <xsd:complexType>
+          <xsd:complexContent>
+            <xsd:extension base="base:BaseResponse">
+              <xsd:sequence>
+                <xsd:element name="marketMapping" minOccurs="0" maxOccurs="unbounded">
+                  <xsd:complexType>
+                    <xsd:complexContent>
+                      <xsd:extension base="csom:Market">
+                        <xsd:sequence>
+                          <xsd:element name="MarketAddresses" type="csom:Address"
+                             minOccurs="0" maxOccurs="unbounded"/>
+                        </xsd:sequence>
+                      </xsd:extension>
+                    </xsd:complexContent>
+                  </xsd:complexType>
+                </xsd:element>
+              </xsd:sequence>
+            </xsd:extension>
+          </xsd:complexContent>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getDeviceAssessmentQuestionsResponse">
+        <xsd:complexType>
+          <xsd:complexContent>
+            <xsd:extension base="base:BaseResponse">
+              <xsd:sequence>
+                <xsd:element ref="csom:verificationQuestionSet"/>
+              </xsd:sequence>
+            </xsd:extension>
+          </xsd:complexContent>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getMarketAddressMappingRequest">
+        <xsd:complexType>
+          <xsd:complexContent>
+            <xsd:extension base="base:BaseRequest">
+              <xsd:sequence>
+                <xsd:element ref="csom:postalCode" minOccurs="0"/>
+              </xsd:sequence>
+            </xsd:extension>
+          </xsd:complexContent>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getDomainReferenceDataResponse">
+        <xsd:complexType>
+          <xsd:complexContent>
+            <xsd:extension base="base:BaseResponse">
+              <xsd:sequence>
+                <xsd:element name="domainReferences" minOccurs="0" maxOccurs="unbounded">
+                  <xsd:complexType>
+                    <xsd:sequence>
+                      <xsd:element name="domainName" minOccurs="0">
+                        <xsd:complexType>
+                          <xsd:complexContent>
+                            <xsd:extension base="csom:NamedText">
+                              <xsd:sequence>
+                                <xsd:element name="domainValue" type="csom:NamedText"
+                                   minOccurs="0" maxOccurs="unbounded"/>
+                              </xsd:sequence>
+                            </xsd:extension>
+                          </xsd:complexContent>
+                        </xsd:complexType>
+                      </xsd:element>
+                    </xsd:sequence>
+                  </xsd:complexType>
+                </xsd:element>
+              </xsd:sequence>
+            </xsd:extension>
+          </xsd:complexContent>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getReasonsRequest">
+        <xsd:complexType>
+          <xsd:complexContent>
+            <xsd:extension base="base:BaseRequest">
+              <xsd:sequence>
+                <xsd:element name="reasonContext" type="xsd:normalizedString"
+                   minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="serviceType" type="csom:BillingTypeCode"
+                   minOccurs="0"/>
+              </xsd:sequence>
+            </xsd:extension>
+          </xsd:complexContent>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="verificationQuestionSet" type="csom:VerificationQuestionSet">
+        <xsd:annotation>
+          <xsd:documentation>Question set with mutliple choice answers and help text.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="getReasonsResponse">
+        <xsd:complexType>
+          <xsd:complexContent>
+            <xsd:extension base="base:BaseResponse">
+              <xsd:sequence>
+                <xsd:element name="reasonSet" minOccurs="0" maxOccurs="unbounded">
+                  <xsd:complexType>
+                    <xsd:sequence>
+                      <xsd:element name="reasonContext" minOccurs="0" maxOccurs="unbounded">
+                        <xsd:complexType>
+                          <xsd:sequence>
+                            <xsd:element name="reason" minOccurs="0" maxOccurs="unbounded">
+                              <xsd:complexType>
+                                <xsd:complexContent>
+                                  <xsd:extension base="csom:NamedText">
+                                    <xsd:sequence>
+                                      <xsd:element name="abfCode" type="xsd:token"
+                                         minOccurs="0" maxOccurs="unbounded"/>
+                                    </xsd:sequence>
+                                  </xsd:extension>
+                                </xsd:complexContent>
+                              </xsd:complexType>
+                            </xsd:element>
+                          </xsd:sequence>
+                          <xsd:attribute name="context" type="xsd:normalizedString"/>
+                        </xsd:complexType>
+                      </xsd:element>
+                    </xsd:sequence>
+                  </xsd:complexType>
+                </xsd:element>
+              </xsd:sequence>
+            </xsd:extension>
+          </xsd:complexContent>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:simpleType name="BillingTypeCode">
+        <xsd:annotation>
+          <xsd:documentation>A shorthand identifying name for the type of billing settlement: Prepaid or Postpaid.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:token">
+          <xsd:enumeration value="Prepaid"/>
+          <xsd:enumeration value="Postpaid"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="CustomerRoleType">
+        <xsd:annotation>
+          <xsd:documentation>Role type</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:token">
+          <xsd:enumeration value="ACCOUNTOWNER"/>
+          <xsd:enumeration value="SUBSCRIBER"/>
+          <xsd:enumeration value="PAYER"/>
+          <xsd:enumeration value="ADMINISTRATOR"/>
+          <xsd:enumeration value="AUTHORIZEDUSER"/>
+          <xsd:enumeration value="PERSONALGUARANTOR"/>
+          <xsd:enumeration value="BILLRECIPIENT"/>
+          <xsd:enumeration value="SUBSCRIBEREDITOR"/>
+          <xsd:enumeration value="SUBSCRIBERVIEWER"/>
+          <xsd:enumeration value="ACCOUNTMANAGER"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:complexType name="VerificationQuestion">
+        <xsd:annotation>
+          <xsd:documentation>A question and list of possible answers for the user to choose from.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence minOccurs="0">
+          <xsd:element name="answerSelectionType" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>Indicates if this is a single selection or multiple selection answer type</xsd:documentation>
+            </xsd:annotation>
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:token">
+                <xsd:enumeration value="SINGLE"/>
+                <xsd:enumeration value="MULTIPLE"/>
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element name="questionText" type="csom:Text" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>Text for the question that is to be presented to the end-user</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="verificationAnswer" type="csom:VerificationAnswer"
+             minOccurs="0" maxOccurs="unbounded">
+            <xsd:annotation>
+              <xsd:documentation>One of the choices of an answer for a given question. It includes the id of the choice and the text to present to the end-user.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="helpText" type="csom:Text" minOccurs="0" maxOccurs="unbounded">
+            <xsd:annotation>
+              <xsd:documentation>Help text that is associated with the question</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+        <xsd:attribute name="questionId" type="xsd:token"/>
+      </xsd:complexType>
+      <xsd:complexType name="QuestionAnswer">
+        <xsd:annotation>
+          <xsd:documentation>Answer detail</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="answerMessage" type="xsd:normalizedString" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>Answer Message</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="answerURLTitle" type="xsd:normalizedString" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>URL title to the answer</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="answerURLLink" type="csom:ReferenceURI" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>URL link to the answer</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="VerificationAnswer">
+        <xsd:annotation>
+          <xsd:documentation>One of the choices of an answer for a given question. It includes the id of the choice and the text to present to the end-user.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence minOccurs="0">
+          <xsd:element name="answerText" type="csom:Text" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>Answer text for this choice to be displayed to the user</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+        <xsd:attribute name="answerId" type="xsd:token"/>
+      </xsd:complexType>
+      <xsd:complexType name="VerificationQuestionSet">
+        <xsd:annotation>
+          <xsd:documentation>A list of questions with multiple choice responses.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="verificationQuestion" type="csom:VerificationQuestion"
+             minOccurs="0" maxOccurs="unbounded">
+            <xsd:annotation>
+              <xsd:documentation>A question and list of possible answers for the user to choose from.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="questionName" type="xsd:normalizedString" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>Name of the question</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="answerName" type="xsd:normalizedString" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>Name of the answer</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="reportingAnswer" type="xsd:normalizedString" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>Reporting answer</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="customAnswer" type="csom:QuestionAnswer" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>Custom answer</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="systemAnswer" type="csom:QuestionAnswer" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>System answer</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+        <xsd:attribute name="languageCode" type="csom:LanguageCode"/>
+        <xsd:attribute name="referenceURI" type="csom:ReferenceURI"/>
+        <xsd:attribute name="setId" type="xsd:token"/>
+      </xsd:complexType>
+      <xsd:complexType name="ResourceEntitlement">
+        <xsd:annotation>
+          <xsd:documentation>Access permission of the user for the specified resource and action.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexContent>
+          <xsd:extension base="base:ResourceAction">
+            <xsd:sequence minOccurs="0">
+              <xsd:element name="isAccessAllowed" type="xsd:boolean" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Boolean value which says whether access allowed or not.</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="responseAttribute" type="base:SpecificationValue"
+                 minOccurs="0" maxOccurs="unbounded">
+                <xsd:annotation>
+                  <xsd:documentation>The name and value of a response attribute.
+    </xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:extension>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="ResourceAction">
+        <xsd:annotation>
+          <xsd:documentation>The name of the application or other resource, and the action requested for entitlement.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence minOccurs="0">
+          <xsd:element name="resourceName" type="xsd:token" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>The name of the application or other resource whose access is being controlled.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="actionName" type="xsd:token" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>The name of the action granted or denied on the resource. For example: view, modify, delete, etc.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:simpleType name="SalesChannelCode">
+        <xsd:annotation>
+          <xsd:documentation>Code defining the manner in which contact is made between T-Mobile and the customer.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:token"/>
+      </xsd:simpleType>
+      <xsd:simpleType name="InventoryChannelCode">
+        <xsd:annotation>
+          <xsd:documentation>Sales channel codes used by SAP.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:token">
+          <xsd:enumeration value="CARE"/>
+          <xsd:enumeration value="DEALER"/>
+          <xsd:enumeration value="IVR"/>
+          <xsd:enumeration value="MOBILE"/>
+          <xsd:enumeration value="NATIONALPARTNER"/>
+          <xsd:enumeration value="RETAIL"/>
+          <xsd:enumeration value="TELESALES"/>
+          <xsd:enumeration value="WEB"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="SalesSubChannelCode">
+        <xsd:annotation>
+          <xsd:documentation>Sales Sub-Channel Code</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:token"/>
+      </xsd:simpleType>
+      <xsd:simpleType name="MarketCode">
+        <xsd:annotation>
+          <xsd:documentation>The three-letter code that uniquely identifies the market.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:token"/>
+      </xsd:simpleType>
+      <xsd:simpleType name="LanguageCode">
+        <xsd:annotation>
+          <xsd:documentation>The language per ISO 639-1 Code: en for English, es for espagnol (Spanish). Reference http://www.iso.org/iso/home/standards/language_codes.htm</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:token">
+          <xsd:length value="2"/>
+          <xsd:pattern value="[a-z][a-z]">
+            <xsd:annotation/>
+          </xsd:pattern>
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="CurrencyCode">
+        <xsd:annotation>
+          <xsd:documentation>For a monetary value, the currency code as defined by the iso 4217 Currency Code standard. For United States dollars, the code is USD. Reference http://www.iso.org/iso/home/standards/currency_codes.htm</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:token">
+          <xsd:length value="3"/>
+          <xsd:pattern value="[A-Z][A-Z][A-Z]">
+            <xsd:annotation/>
+          </xsd:pattern>
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="ReferenceURI">
+        <xsd:annotation>
+          <xsd:documentation>A URI that can be used to return information about an object.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:anyURI"/>
+      </xsd:simpleType>
+      <xsd:complexType name="Name">
+        <xsd:annotation>
+          <xsd:documentation>A structure that provides name for a certain usage and language. For example, a name that is used for display vs an internal name.
+    			</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleContent>
+          <xsd:extension base="csom:Text"/>
+        </xsd:simpleContent>
+      </xsd:complexType>
+      <xsd:complexType name="Description">
+        <xsd:annotation>
+          <xsd:documentation>A structure that provides a description for a certain usage and language. For example, a description in Spanish for web display.
+    			</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleContent>
+          <xsd:extension base="csom:Text">
+            <xsd:attribute name="usageContext" type="xsd:token">
+              <xsd:annotation>
+                <xsd:documentation>The frame of reference where the description is applicable. For example WEB, MOBILE DEVICE.
+    						</xsd:documentation>
+              </xsd:annotation>
+            </xsd:attribute>
+          </xsd:extension>
+        </xsd:simpleContent>
+      </xsd:complexType>
+      <xsd:complexType name="Indicator">
+        <xsd:simpleContent>
+          <xsd:extension base="xsd:token">
+            <xsd:attribute name="name" type="xsd:token">
+              <xsd:annotation>
+                <xsd:documentation>An Indicator is a property of an object that can be assigned a value.</xsd:documentation>
+              </xsd:annotation>
+            </xsd:attribute>
+          </xsd:extension>
+        </xsd:simpleContent>
+      </xsd:complexType>
+      <xsd:complexType name="SpecificationValue">
+        <xsd:annotation>
+          <xsd:documentation>A specification is a property of an object that can be assigned a value.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleContent>
+          <xsd:extension base="xsd:token">
+            <xsd:attribute name="currencyCode" type="csom:CurrencyCode">
+              <xsd:annotation>
+                <xsd:documentation>The currency of the specification value, if the data type is currency.</xsd:documentation>
+              </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="dataType" type="xsd:token">
+              <xsd:annotation>
+                <xsd:documentation>The data type of the value.  The recognized data types are specified by the xml w3c standard, minus the namespace prefix.  For example xsd:boolean would be expressed as boolean.</xsd:documentation>
+              </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="measurementUnit" type="xsd:token">
+              <xsd:annotation>
+                <xsd:documentation>The unit of measure of the value, if applicable.</xsd:documentation>
+              </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="name" type="xsd:token">
+              <xsd:annotation>
+                <xsd:documentation>The name of the Specification value; a label by which the value is commonly known.  For example a name = "LongDescription" for a value that contains a long description.</xsd:documentation>
+              </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="precision" type="xsd:nonNegativeInteger">
+              <xsd:annotation>
+                <xsd:documentation>For a numeric value, how many total digits are allowed.</xsd:documentation>
+              </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="scale" type="xsd:nonNegativeInteger">
+              <xsd:annotation>
+                <xsd:documentation>For a numeric value,the number of digits to the right of the decimal point.</xsd:documentation>
+              </xsd:annotation>
+            </xsd:attribute>
+          </xsd:extension>
+        </xsd:simpleContent>
+      </xsd:complexType>
+      <xsd:complexType name="DomainKey">
+        <xsd:annotation>
+          <xsd:documentation>The Domain Key structure is used to uniquely identifiy an object in a system (or domain) other than the system of record.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence minOccurs="0">
+          <xsd:element name="keyName" type="xsd:token" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>The name of the key identifier, within the specified domain. For example, if an object can be identified by a field called code, then keyName = "code".</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="keyValue" type="xsd:normalizedString" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>The value of the key identifier.  For example, if an object can be identified by a field called code, then keyName = "code".  The keyValue would be set to the value of the field called "code".</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="additionalKeyPart" type="csom:KeyPart" minOccurs="0"
+             maxOccurs="unbounded">
+            <xsd:annotation>
+              <xsd:documentation>Additional key values that are needed to uniquely identify the object within the domain.  For example, if an object can be identified by (code + effectiveDate), the keyName="code" and additionalKeyPart/keyName = "effectiveDate".</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+        <xsd:attribute name="domainName" type="xsd:token">
+          <xsd:annotation>
+            <xsd:documentation>The system or business domain that is the source of the key. For example: PREPAIDBILLING, WEBCATALOG, SAMSON, SAP.			</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+      </xsd:complexType>
+      <xsd:complexType name="KeyPart">
+        <xsd:annotation>
+          <xsd:documentation>Additional key values that are needed to uniquely identify the object within the domain.  For example, if an object can be identified by (code + effectiveDate), the keyName="code" and additionalKeyPart/keyName = "effectiveDate".</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence minOccurs="0">
+          <xsd:element name="keyPartName" type="xsd:token" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>The name of the additional key part, if a multi-part key is required to uniquely identify an object, as specified in the alternate system (domain), other than the system of record.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="keyPartValue" type="xsd:normalizedString" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>The value of the additional key part, if a multi-part key is required to uniquely identify an object, as specified in the alternate system (domain), other than the system of record.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+        <xsd:attribute name="ordinal" type="xsd:int">
+          <xsd:annotation>
+            <xsd:documentation>The ordinal is used to sequence the key parts when accessing the object in the specified domain.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+      </xsd:complexType>
+      <xsd:simpleType name="PostalCode">
+        <xsd:annotation>
+          <xsd:documentation>A code specifying the postal code of the mailing address.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:token">
+          <xsd:maxLength value="9"/>
+          <xsd:minLength value="5"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:schema>
+
+    <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xml="http://www.w3.org/XML/1998/namespace"
+       elementFormDefault="qualified" attributeFormDefault="unqualified" targetNamespace="http://services.tmobile.com/base"
+       xmlns:base="http://services.tmobile.com/base" xmlns:csom="http://services.tmobile.com/ReferenceData/OrderReferenceDataWSIL/V1">
+      <xsd:annotation>
+        <xsd:documentation>Common interface elements</xsd:documentation>
+      </xsd:annotation>
+      <!--Schema import OrderReferenceDataWSIL is actually inlined into the service definiton. Changing to namespace import.-->
+      <xsd:import namespace="http://services.tmobile.com/ReferenceData/OrderReferenceDataWSIL/V1"/>
+      <xsd:complexType name="Sender">
+        <xsd:sequence>
+          <xsd:element name="senderId" type="xsd:token">
+            <xsd:annotation/>
+          </xsd:element>
+          <xsd:element name="channelId" type="xsd:token">
+            <xsd:annotation/>
+          </xsd:element>
+          <xsd:element name="applicationId" type="xsd:token">
+            <xsd:annotation/>
+          </xsd:element>
+          <xsd:element name="applicationUserId" type="xsd:token" minOccurs="0"/>
+          <xsd:element name="sessionId" type="xsd:token" minOccurs="0">
+            <xsd:annotation/>
+          </xsd:element>
+          <xsd:element name="workflowId" type="xsd:token" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>
+    						A value populated by the Sender used to track their workflow
+    						within the confines of a session.
+    						Senders are encouraged to develop a
+    						useful scheme.
+    						Do not use customer-sensitive information.
+    							</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="activityId" type="xsd:token" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>
+    						A value populated by the Sender used to track a unit of work
+    						within a workflow.
+    						Senders are
+    						encouraged to develop a
+    						useful scheme.
+    						Do not use customer-sensitive information.
+    							</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="timestamp" type="xsd:dateTime" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>
+    						A timestamp provided by Sender to track their workflow.
+    						Usually set to the moment when a request
+    						is made.
+    					</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="storeId" type="xsd:token" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>
+    						For tracking purposes only. Unique identifier for the store.
+    					</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="dealerCode" type="base:DealerCode" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>For tracking purposes only. Code that uniquely identifies the dealer.
+    					</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="scope" type="xsd:token" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>use for filtering output based on end user (ie mobile device vs laptop)</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="interactionId" type="xsd:token" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>This Id is going to represent a common transaction id across all service calls made from UI, while completing all business activity needs of a particular customer. Self serve case, generated at time of login and all calls will have this same id. In Assisted channel case, each customer lookup will generate a new interaction Id and carried for all calls made while serving that customer.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="masterDealerCode" type="base:DealerCode" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>Code that uniquely identifies the master dealer for a large retail partner, such as Apple or Costco. Otherwise left null.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="entitlements" minOccurs="0" maxOccurs="unbounded">
+            <xsd:annotation>
+              <xsd:documentation>A set of entitlements for the specified user.</xsd:documentation>
+            </xsd:annotation>
+            <xsd:complexType>
+              <xsd:sequence minOccurs="0">
+                <xsd:element name="entitlement" type="csom:ResourceEntitlement"
+                   minOccurs="0" maxOccurs="unbounded">
+                  <xsd:annotation>
+                    <xsd:documentation>Access permission of the user for specified resource and action.</xsd:documentation>
+                  </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="userId" type="xsd:token" minOccurs="0">
+                  <xsd:annotation>
+                    <xsd:documentation>User to whom this set of entitlements applies.</xsd:documentation>
+                  </xsd:annotation>
+                </xsd:element>
+              </xsd:sequence>
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="TargetSystemIdentity">
+        <xsd:all>
+          <xsd:element name="systemId" type="xsd:token"/>
+          <xsd:element name="userId" type="xsd:token"/>
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="Target">
+        <xsd:sequence>
+          <xsd:element name="targetSystemId" type="base:TargetSystemIdentity"
+             minOccurs="0" maxOccurs="unbounded"/>
+          <xsd:element name="userCompanyId" type="xsd:token" minOccurs="0"/>
+          <xsd:element name="customerCompanyId" type="xsd:token" minOccurs="0"/>
+          <xsd:element name="servicePartnerId" type="xsd:token" minOccurs="0"/>
+          <xsd:element name="transactionType" type="xsd:token" minOccurs="0"/>
+          <xsd:element name="customerId" type="xsd:token" minOccurs="0"/>
+          <xsd:element name="customerUserId" type="xsd:token" minOccurs="0"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="Header">
+        <xsd:annotation>
+          <xsd:documentation>
+    				Metadata for every POX and SOAP transaction. Data in the Header
+    				is used to track and configure
+    				service operations. It's supplied
+    				by the Sender and returned in the response for continuity and
+    				to return values set
+    				by the system.
+    			</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="sender" type="base:Sender">
+            <xsd:annotation>
+              <xsd:documentation>
+    						A description of the actor that is calling a service operation.
+    						This data is supplied by the
+    						calling client at the time of the request.
+    					</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="target" type="base:Target" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>
+    						Data that the target system can use to configure the operation.
+    					</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="providerId" type="base:ApplicationObjectKey" minOccurs="0"
+             maxOccurs="unbounded">
+            <xsd:annotation>
+              <xsd:documentation>Participating Application specific internally generated unique identifier. </xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ApplicationObjectKey">
+        <xsd:sequence>
+          <xsd:element name="id" type="xsd:token" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>Key Identifier</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="contextId" type="xsd:token" minOccurs="0" maxOccurs="unbounded">
+            <xsd:annotation>
+              <xsd:documentation>Key Qualifiers</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:simpleType name="DealerCode">
+        <xsd:annotation>
+          <xsd:documentation>Code that uniquely identifies the dealer.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:token"/>
+      </xsd:simpleType>
+      <xsd:complexType name="VerificationQuestion">
+        <xsd:annotation>
+          <xsd:documentation>A question and list of possible answers for the user to choose from.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence minOccurs="0">
+          <xsd:element name="answerSelectionType" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>Indicates if this is a single selection or multiple selection answer type</xsd:documentation>
+            </xsd:annotation>
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:token">
+                <xsd:enumeration value="SINGLE"/>
+                <xsd:enumeration value="MULTIPLE"/>
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element name="questionText" type="csom:Text" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>Text for the question that is to be presented to the end-user</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="verificationAnswer" type="csom:VerificationAnswer"
+             minOccurs="0" maxOccurs="unbounded">
+            <xsd:annotation>
+              <xsd:documentation>One of the choices of an answer for a given question. It includes the id of the choice and the text to present to the end-user.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="helpText" type="csom:Text" minOccurs="0" maxOccurs="unbounded">
+            <xsd:annotation>
+              <xsd:documentation>Help text that is associated with the question</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+        <xsd:attribute name="questionId" type="xsd:token"/>
+      </xsd:complexType>
+      <xsd:complexType name="QuestionAnswer">
+        <xsd:annotation>
+          <xsd:documentation>Answer detail</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="answerMessage" type="xsd:normalizedString" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>Answer Message</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="answerURLTitle" type="xsd:normalizedString" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>URL title to the answer</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="answerURLLink" type="csom:ReferenceURI" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>URL link to the answer</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="VerificationAnswer">
+        <xsd:annotation>
+          <xsd:documentation>One of the choices of an answer for a given question. It includes the id of the choice and the text to present to the end-user.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence minOccurs="0">
+          <xsd:element name="answerText" type="csom:Text" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>Answer text for this choice to be displayed to the user</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+        <xsd:attribute name="answerId" type="xsd:token"/>
+      </xsd:complexType>
+      <xsd:complexType name="VerificationQuestionSet">
+        <xsd:annotation>
+          <xsd:documentation>A list of questions with multiple choice responses.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="verificationQuestion" type="csom:VerificationQuestion"
+             minOccurs="0" maxOccurs="unbounded">
+            <xsd:annotation>
+              <xsd:documentation>A question and list of possible answers for the user to choose from.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="questionName" type="xsd:normalizedString" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>Name of the question</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="answerName" type="xsd:normalizedString" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>Name of the answer</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="reportingAnswer" type="xsd:normalizedString" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>Reporting answer</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="customAnswer" type="csom:QuestionAnswer" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>Custom answer</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="systemAnswer" type="csom:QuestionAnswer" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>System answer</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+        <xsd:attribute name="languageCode" type="csom:LanguageCode"/>
+        <xsd:attribute name="referenceURI" type="csom:ReferenceURI"/>
+        <xsd:attribute name="setId" type="xsd:token"/>
+      </xsd:complexType>
+      <xsd:complexType name="ResourceEntitlement">
+        <xsd:annotation>
+          <xsd:documentation>Access permission of the user for the specified resource and action.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexContent>
+          <xsd:extension base="base:ResourceAction">
+            <xsd:sequence minOccurs="0">
+              <xsd:element name="isAccessAllowed" type="xsd:boolean" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Boolean value which says whether access allowed or not.</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="responseAttribute" type="base:SpecificationValue"
+                 minOccurs="0" maxOccurs="unbounded">
+                <xsd:annotation>
+                  <xsd:documentation>The name and value of a response attribute.
+    </xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:extension>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="ResourceAction">
+        <xsd:annotation>
+          <xsd:documentation>The name of the application or other resource, and the action requested for entitlement.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence minOccurs="0">
+          <xsd:element name="resourceName" type="xsd:token" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>The name of the application or other resource whose access is being controlled.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="actionName" type="xsd:token" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>The name of the action granted or denied on the resource. For example: view, modify, delete, etc.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ResponseStatus">
+        <xsd:sequence>
+          <xsd:element name="detail" type="base:ResponseStatusDetail" minOccurs="0"
+             maxOccurs="unbounded">
+            <xsd:annotation>
+              <xsd:documentation>
+    						Status details that describe one or more contributions to the overall response code.
+    					</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+        <xsd:attribute name="code" type="base:ResponseStatusCode"/>
+      </xsd:complexType>
+      <xsd:complexType name="ResponseStatusDetail">
+        <xsd:sequence>
+          <xsd:element name="definition" type="xsd:normalizedString" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>
+    						The generic definition of subStatusCode.
+                        </xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="explanation" type="xsd:normalizedString" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>
+    						Specific information about the data or circumstances that explains why this status detail is part of the response.
+    						It should provide the details aid in troubleshooting and taking further action.
+    					</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+        <xsd:attribute name="subStatusCode" type="xsd:token">
+          <xsd:annotation>
+            <xsd:documentation>
+    					A numeric value that defines the status detail, like an error code.
+    					This code allows client systems to programmatically handle the status detail, if desired.
+    		        </xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+      </xsd:complexType>
+      <xsd:simpleType name="ResponseStatusCode">
+        <xsd:annotation>
+          <xsd:documentation>
+    				A numeric code returned in each response to indicate whether an operation
+    				completed successfully, completed with errors, or failed.
+                </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:integer">
+          <xsd:enumeration value="100">
+            <xsd:annotation/>
+          </xsd:enumeration>
+          <xsd:enumeration value="101">
+            <xsd:annotation/>
+          </xsd:enumeration>
+          <xsd:enumeration value="102">
+            <xsd:annotation/>
+          </xsd:enumeration>
+          <xsd:enumeration value="103">
+            <xsd:annotation/>
+          </xsd:enumeration>
+          <xsd:enumeration value="104">
+            <xsd:annotation/>
+          </xsd:enumeration>
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:complexType name="BaseResponse" abstract="true">
+        <xsd:annotation>
+          <xsd:documentation>The basic type that should be extended for a response.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexContent>
+          <xsd:extension base="base:BaseRequest">
+            <xsd:sequence>
+              <xsd:element name="responseStatus" type="base:ResponseStatus"/>
+            </xsd:sequence>
+          </xsd:extension>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="BaseRequest" abstract="true">
+        <xsd:annotation>
+          <xsd:documentation>The basic type that should be extended for a request.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="header" type="base:Header"/>
+        </xsd:sequence>
+        <xsd:attribute name="serviceTransactionId" type="xsd:token">
+          <xsd:annotation/>
+        </xsd:attribute>
+        <xsd:attribute name="version" type="xsd:token">
+          <xsd:annotation>
+            <xsd:documentation>Version of the service used for this message.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+      </xsd:complexType>
+      <xsd:complexType name="Name">
+        <xsd:annotation>
+          <xsd:documentation>A structure that provides name for a certain usage and language. For example, a name that is used for display vs an internal name.
+    			</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleContent>
+          <xsd:extension base="csom:Text"/>
+        </xsd:simpleContent>
+      </xsd:complexType>
+      <xsd:complexType name="Description">
+        <xsd:annotation>
+          <xsd:documentation>A structure that provides a description for a certain usage and language. For example, a description in Spanish for web display.
+    			</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleContent>
+          <xsd:extension base="csom:Text">
+            <xsd:attribute name="usageContext" type="xsd:token">
+              <xsd:annotation>
+                <xsd:documentation>The frame of reference where the description is applicable. For example WEB, MOBILE DEVICE.
+    						</xsd:documentation>
+              </xsd:annotation>
+            </xsd:attribute>
+          </xsd:extension>
+        </xsd:simpleContent>
+      </xsd:complexType>
+      <xsd:complexType name="Indicator">
+        <xsd:simpleContent>
+          <xsd:extension base="xsd:token">
+            <xsd:attribute name="name" type="xsd:token">
+              <xsd:annotation>
+                <xsd:documentation>An Indicator is a property of an object that can be assigned a value.</xsd:documentation>
+              </xsd:annotation>
+            </xsd:attribute>
+          </xsd:extension>
+        </xsd:simpleContent>
+      </xsd:complexType>
+      <xsd:complexType name="SpecificationValue">
+        <xsd:annotation>
+          <xsd:documentation>A specification is a property of an object that can be assigned a value.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleContent>
+          <xsd:extension base="xsd:token">
+            <xsd:attribute name="currencyCode" type="csom:CurrencyCode">
+              <xsd:annotation>
+                <xsd:documentation>The currency of the specification value, if the data type is currency.</xsd:documentation>
+              </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="dataType" type="xsd:token">
+              <xsd:annotation>
+                <xsd:documentation>The data type of the value.  The recognized data types are specified by the xml w3c standard, minus the namespace prefix.  For example xsd:boolean would be expressed as boolean.</xsd:documentation>
+              </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="measurementUnit" type="xsd:token">
+              <xsd:annotation>
+                <xsd:documentation>The unit of measure of the value, if applicable.</xsd:documentation>
+              </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="name" type="xsd:token">
+              <xsd:annotation>
+                <xsd:documentation>The name of the Specification value; a label by which the value is commonly known.  For example a name = "LongDescription" for a value that contains a long description.</xsd:documentation>
+              </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="precision" type="xsd:nonNegativeInteger">
+              <xsd:annotation>
+                <xsd:documentation>For a numeric value, how many total digits are allowed.</xsd:documentation>
+              </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="scale" type="xsd:nonNegativeInteger">
+              <xsd:annotation>
+                <xsd:documentation>For a numeric value,the number of digits to the right of the decimal point.</xsd:documentation>
+              </xsd:annotation>
+            </xsd:attribute>
+          </xsd:extension>
+        </xsd:simpleContent>
+      </xsd:complexType>
+      <xsd:complexType name="DomainKey">
+        <xsd:annotation>
+          <xsd:documentation>The Domain Key structure is used to uniquely identifiy an object in a system (or domain) other than the system of record.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence minOccurs="0">
+          <xsd:element name="keyName" type="xsd:token" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>The name of the key identifier, within the specified domain. For example, if an object can be identified by a field called code, then keyName = "code".</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="keyValue" type="xsd:normalizedString" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>The value of the key identifier.  For example, if an object can be identified by a field called code, then keyName = "code".  The keyValue would be set to the value of the field called "code".</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="additionalKeyPart" type="csom:KeyPart" minOccurs="0"
+             maxOccurs="unbounded">
+            <xsd:annotation>
+              <xsd:documentation>Additional key values that are needed to uniquely identify the object within the domain.  For example, if an object can be identified by (code + effectiveDate), the keyName="code" and additionalKeyPart/keyName = "effectiveDate".</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+        <xsd:attribute name="domainName" type="xsd:token">
+          <xsd:annotation>
+            <xsd:documentation>The system or business domain that is the source of the key. For example: PREPAIDBILLING, WEBCATALOG, SAMSON, SAP.			</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+      </xsd:complexType>
+      <xsd:complexType name="KeyPart">
+        <xsd:annotation>
+          <xsd:documentation>Additional key values that are needed to uniquely identify the object within the domain.  For example, if an object can be identified by (code + effectiveDate), the keyName="code" and additionalKeyPart/keyName = "effectiveDate".</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence minOccurs="0">
+          <xsd:element name="keyPartName" type="xsd:token" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>The name of the additional key part, if a multi-part key is required to uniquely identify an object, as specified in the alternate system (domain), other than the system of record.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="keyPartValue" type="xsd:normalizedString" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>The value of the additional key part, if a multi-part key is required to uniquely identify an object, as specified in the alternate system (domain), other than the system of record.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+        <xsd:attribute name="ordinal" type="xsd:int">
+          <xsd:annotation>
+            <xsd:documentation>The ordinal is used to sequence the key parts when accessing the object in the specified domain.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+      </xsd:complexType>
+    </xsd:schema>
+  </wsdl11:types>
+  <wsdl11:message name="getDomainReferenceDataRequestMessage">
+    <wsdl11:part name="body" element="csom:getDomainReferenceDataRequest"/>
+  </wsdl11:message>
+  <wsdl11:message name="getDomainReferenceDataResponseMessage">
+    <wsdl11:part name="body" element="csom:getDomainReferenceDataResponse"/>
+  </wsdl11:message>
+  <wsdl11:message name="getFulfillmentMethodsRequestMessage">
+    <wsdl11:part name="body" element="csom:getFulfillmentMethodsRequest"/>
+  </wsdl11:message>
+  <wsdl11:message name="getFulfillmentMethodsResponseMessage">
+    <wsdl11:part name="body" element="csom:getFulfillmentMethodsResponse"/>
+  </wsdl11:message>
+  <wsdl11:message name="getModeOfExchangeRequestMessage">
+    <wsdl11:part name="body" element="csom:getModeOfExchangeRequest"/>
+  </wsdl11:message>
+  <wsdl11:message name="getModeOfExchangeResponseMessage">
+    <wsdl11:part name="body" element="csom:getModeOfExchangeResponse"/>
+  </wsdl11:message>
+  <wsdl11:message name="getDeviceAssessmentQuestionsRequestMessage">
+    <wsdl11:part name="body" element="csom:getDeviceAssessmentQuestionsRequest"/>
+  </wsdl11:message>
+  <wsdl11:message name="getDeviceAssessmentQuestionsResponseMessage">
+    <wsdl11:part name="body" element="csom:getDeviceAssessmentQuestionsResponse"/>
+  </wsdl11:message>
+  <wsdl11:message name="getReasonsRequestMessage">
+    <wsdl11:part name="body" element="csom:getReasonsRequest"/>
+  </wsdl11:message>
+  <wsdl11:message name="getReasonsResponseMessage">
+    <wsdl11:part name="body" element="csom:getReasonsResponse"/>
+  </wsdl11:message>
+  <wsdl11:message name="getCustomerRoleTypesRequestMessage">
+    <wsdl11:part name="body" element="csom:getCustomerRoleTypesRequest"/>
+  </wsdl11:message>
+  <wsdl11:message name="getCustomerRoleTypesResponseMessage">
+    <wsdl11:part name="body" element="csom:getCustomerRoleTypesResponse"/>
+  </wsdl11:message>
+  <wsdl11:message name="getMarketAddressMappingRequestMessage">
+    <wsdl11:part name="body" element="csom:getMarketAddressMappingRequest"/>
+  </wsdl11:message>
+  <wsdl11:message name="getMarketAddressMappingResponseMessage">
+    <wsdl11:part name="body" element="csom:getMarketAddressMappingResponse"/>
+  </wsdl11:message>
+  <wsdl11:portType name="OrderReferenceDataWSIL">
+    <wsdl11:operation name="getMarketAddressMapping">
+      <wsdl11:input message="csom:getMarketAddressMappingRequestMessage"/>
+      <wsdl11:output message="csom:getMarketAddressMappingResponseMessage"/>
+    </wsdl11:operation>
+    <wsdl11:operation name="getFulfillmentMethods">
+      <wsdl11:documentation>Provides the list of options to pick up in store or ship to address.</wsdl11:documentation>
+      <wsdl11:input message="csom:getFulfillmentMethodsRequestMessage"/>
+      <wsdl11:output message="csom:getFulfillmentMethodsResponseMessage"/>
+    </wsdl11:operation>
+    <wsdl11:operation name="getModeOfExchange">
+      <wsdl11:input message="csom:getModeOfExchangeRequestMessage"/>
+      <wsdl11:output message="csom:getModeOfExchangeResponseMessage"/>
+    </wsdl11:operation>
+    <wsdl11:operation name="getReasons">
+      <wsdl11:input message="csom:getReasonsRequestMessage"/>
+      <wsdl11:output message="csom:getReasonsResponseMessage"/>
+    </wsdl11:operation>
+    <wsdl11:operation name="getDomainReferenceData">
+      <wsdl11:input message="csom:getDomainReferenceDataRequestMessage"/>
+      <wsdl11:output message="csom:getDomainReferenceDataResponseMessage"/>
+    </wsdl11:operation>
+    <wsdl11:operation name="getCustomerRoleTypes">
+      <wsdl11:input message="csom:getCustomerRoleTypesRequestMessage"/>
+      <wsdl11:output message="csom:getCustomerRoleTypesResponseMessage"/>
+    </wsdl11:operation>
+    <wsdl11:operation name="getDeviceAssessmentQuestions">
+      <wsdl11:input message="csom:getDeviceAssessmentQuestionsRequestMessage"/>
+      <wsdl11:output message="csom:getDeviceAssessmentQuestionsResponseMessage"/>
+    </wsdl11:operation>
+  </wsdl11:portType>
+  <!--END ABSTRACT DESCRIPTION-->
+  <!--BEGIN BINDING DESCRIPTION-->
+  <wsdl11:binding name="OrderReferenceDataWSILBinding" type="csom:OrderReferenceDataWSIL">
+    <soap11:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl11:operation name="getMarketAddressMapping">
+      <soap11:operation soapAction="getMarketAddressMapping" wsdl11:required="true"
+           style="document"/>
+      <wsdl11:input>
+        <soap11:body use="literal"/>
+      </wsdl11:input>
+      <wsdl11:output>
+        <soap11:body use="literal"/>
+      </wsdl11:output>
+    </wsdl11:operation>
+    <wsdl11:operation name="getFulfillmentMethods">
+      <soap11:operation soapAction="getFulfillmentMethods" wsdl11:required="true"
+           style="document"/>
+      <wsdl11:input>
+        <soap11:body use="literal"/>
+      </wsdl11:input>
+      <wsdl11:output>
+        <soap11:body use="literal"/>
+      </wsdl11:output>
+    </wsdl11:operation>
+    <wsdl11:operation name="getModeOfExchange">
+      <soap11:operation soapAction="getModeOfExchange" wsdl11:required="true"
+           style="document"/>
+      <wsdl11:input>
+        <soap11:body use="literal"/>
+      </wsdl11:input>
+      <wsdl11:output>
+        <soap11:body use="literal"/>
+      </wsdl11:output>
+    </wsdl11:operation>
+    <wsdl11:operation name="getReasons">
+      <soap11:operation soapAction="getReasons" wsdl11:required="true" style="document"/>
+      <wsdl11:input>
+        <soap11:body use="literal"/>
+      </wsdl11:input>
+      <wsdl11:output>
+        <soap11:body use="literal"/>
+      </wsdl11:output>
+    </wsdl11:operation>
+    <wsdl11:operation name="getDomainReferenceData">
+      <soap11:operation soapAction="getDomainReferenceData" wsdl11:required="true"
+           style="document"/>
+      <wsdl11:input>
+        <soap11:body use="literal"/>
+      </wsdl11:input>
+      <wsdl11:output>
+        <soap11:body use="literal"/>
+      </wsdl11:output>
+    </wsdl11:operation>
+    <wsdl11:operation name="getCustomerRoleTypes">
+      <soap11:operation soapAction="getCustomerRoleTypes" wsdl11:required="true"
+           style="document"/>
+      <wsdl11:input>
+        <soap11:body use="literal"/>
+      </wsdl11:input>
+      <wsdl11:output>
+        <soap11:body use="literal"/>
+      </wsdl11:output>
+    </wsdl11:operation>
+    <wsdl11:operation name="getDeviceAssessmentQuestions">
+      <soap11:operation soapAction="getDeviceAssessmentQuestions" wsdl11:required="true"
+           style="document"/>
+      <wsdl11:input>
+        <soap11:body use="literal"/>
+      </wsdl11:input>
+      <wsdl11:output>
+        <soap11:body use="literal"/>
+      </wsdl11:output>
+    </wsdl11:operation>
+  </wsdl11:binding>
+  <!--END BINDING DESCRIPTION-->
+  <!--BEGIN SERVICE DESCRIPTION-->
+  <wsdl11:service name="OrderReferenceDataWSIL">
+    <wsdl11:port name="OrderReferenceDataWSIL" binding="csom:OrderReferenceDataWSILBinding">
+      <soap11:address location="http://localhost:8080/service/soap/ReferenceData/OrderReferenceDataWSIL/V1"/>
+    </wsdl11:port>
+  </wsdl11:service>
+  <!--END SERVICE DESCRIPTION-->
+</wsdl11:definitions>

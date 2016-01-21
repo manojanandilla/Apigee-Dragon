@@ -1,0 +1,109 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:v1="http://services.tmobile.com/OrderManagement/CartWSIL/V1" xmlns:base="http://services.tmobile.com/base">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <v1:getCartDetailsRequest serviceTransactionId="?" version="?">
+         <base:header>
+            <base:sender>
+               <base:senderId>?</base:senderId>
+               <base:channelId>?</base:channelId>
+               <base:applicationId>?</base:applicationId>
+               <!--Optional:-->
+               <base:applicationUserId>?</base:applicationUserId>
+               <!--Optional:-->
+               <base:sessionId>?</base:sessionId>
+               <!--Optional:-->
+               <base:workflowId>?</base:workflowId>
+               <!--Optional:-->
+               <base:activityId>?</base:activityId>
+               <!--Optional:-->
+               <base:timestamp>?</base:timestamp>
+               <!--Optional:-->
+               <base:storeId>?</base:storeId>
+               <!--Optional:-->
+               <base:dealerCode>?</base:dealerCode>
+               <!--Optional:-->
+               <base:scope>?</base:scope>
+               <!--Optional:-->
+               <base:interactionId>?</base:interactionId>
+               <!--Optional:-->
+               <base:masterDealerCode>?</base:masterDealerCode>
+               <!--Zero or more repetitions:-->
+               <base:entitlements>
+                  <!--Zero or more repetitions:-->
+                  <base:entitlement>
+                     <!--Optional:-->
+                     <v1:resourceName>?</v1:resourceName>
+                     <!--Optional:-->
+                     <v1:actionName>?</v1:actionName>
+                     <!--Optional:-->
+                     <v1:isAccessAllowed>?</v1:isAccessAllowed>
+                     <!--Zero or more repetitions:-->
+                     <v1:responseAttribute currencyCode="?" dataType="?" measurementUnit="?" name="?" precision="?" scale="?">?</v1:responseAttribute>
+                  </base:entitlement>
+                  <!--Optional:-->
+                  <base:userId>?</base:userId>
+               </base:entitlements>
+            </base:sender>
+            <!--Optional:-->
+            <base:target>
+               <!--Zero or more repetitions:-->
+               <base:targetSystemId>
+                  <!--You may enter the following 2 items in any order-->
+                  <base:systemId>?</base:systemId>
+                  <base:userId>?</base:userId>
+               </base:targetSystemId>
+               <!--Optional:-->
+               <base:userCompanyId>?</base:userCompanyId>
+               <!--Optional:-->
+               <base:customerCompanyId>?</base:customerCompanyId>
+               <!--Optional:-->
+               <base:servicePartnerId>?</base:servicePartnerId>
+               <!--Optional:-->
+               <base:transactionType>?</base:transactionType>
+               <!--Optional:-->
+               <base:customerId>?</base:customerId>
+               <!--Optional:-->
+               <base:customerUserId>?</base:customerUserId>
+            </base:target>
+            <!--Zero or more repetitions:-->
+            <base:providerId>
+               <!--Optional:-->
+               <base:id>?</base:id>
+               <!--Zero or more repetitions:-->
+               <base:contextId>?</base:contextId>
+            </base:providerId>
+         </base:header>
+         <!--Optional:-->
+         <v1:customerId>?</v1:customerId>
+         <!--Optional:-->
+         <v1:cartId>?</v1:cartId>
+         <!--Optional:-->
+         <v1:emailAddress>?</v1:emailAddress>
+         <!--Optional:-->
+         <v1:phoneNumber>?</v1:phoneNumber>
+         <!--Optional:-->
+         <v1:changeOfResponsibility>
+            <!--Optional:-->
+            <v1:receiverEmailAddress>?</v1:receiverEmailAddress>
+            <!--Optional:-->
+            <v1:receiverMSISDN>?</v1:receiverMSISDN>
+         </v1:changeOfResponsibility>
+         <!--Optional:-->
+         <v1:userId>?</v1:userId>
+         <!--Optional:-->
+         <v1:dealerCode>?</v1:dealerCode>
+         <!--Optional:-->
+         <v1:firstName>?</v1:firstName>
+         <!--Optional:-->
+         <v1:lastName>?</v1:lastName>
+         <!--Optional:-->
+         <v1:cartDate>?</v1:cartDate>
+         <!--Optional:-->
+         <v1:taxId>?</v1:taxId>
+         <!--Optional:-->
+         <v1:SSN>?</v1:SSN>
+         <!--Optional:-->
+         <v1:financialAccountNumber>?</v1:financialAccountNumber>
+      </v1:getCartDetailsRequest>
+   </soapenv:Body>
+</soapenv:Envelope>

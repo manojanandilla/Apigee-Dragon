@@ -23,15 +23,16 @@
 					<div class="form-group">
 						<textarea ng-model="wsdl.xPath" rows="10" cols="50"></textarea>
 					</div>
-				</div>
-				<div class="col-md-1">
+					<div class="col-md-1">
 					<div class="form-group">
 						<button type="submit" class="btn btn-primary"
 							ng-click="validate()">
-							<span class="glyphicon glyphicon-ok"></span>Submit
+							<span class="glyphicon glyphicon-ok"></span>Validate
 						</button>
 					</div>
 				</div>
+				</div>
+				
 				<div class="col-md-6">
 
 
@@ -40,8 +41,8 @@
 
 						<div class="dropdown">
 							<select ng-model="wsdl.wsdlName"
-								ng-options="wsdlName for wsdlName in wsdls"
-								class="form-control" ng-change="getOperations(wsdl.wsdlName)">
+								ng-options="wsdlName for wsdlName in wsdls" class="form-control"
+								ng-change="getOperations(wsdl.wsdlName)">
 								<option value="">Select WSDL</option>
 							</select>
 						</div>
@@ -64,18 +65,18 @@
 						</div>
 					</div>
 
-
-
-
 				</div>
 
 			</div>
-
-
-
-
 		</form>
-	</div>
+		
+		<table>
+			  <tr ng-repeat="result in results">
+				    <td>{{ result }}</td>
+			  </tr>
+		</table>
+
+		
 	</div>
 	<script src="./bower_components/angular/angular.js"
 		type="text/javascript"></script>

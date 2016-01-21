@@ -5,7 +5,9 @@
 	var urlBase = '/dmvalidator';
 	
 	this.getWSDL = function () {
-        return $resource(urlBase);
+        return $resource(urlBase,{},{
+        	save : {method: 'POST',isArray: true} 
+        });
     };
     
     this.getOperations = function (name) {
